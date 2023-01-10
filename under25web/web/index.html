@@ -1,0 +1,95 @@
+<!DOCTYPE html><html><head>
+    <!--
+      If you are serving your web app in a path other than the root, change the
+      href value below to reflect the base path you are serving from.
+      The path provided below has to start and end with a slash "/" in order for
+      it to work correctly.
+      Fore more details:
+      * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+    -->
+    <base href="/">
+
+    <meta charset="UTF-8">
+    <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+    <meta name="description" content="A new Flutter project.">
+
+    <!-- iOS meta tags & icons -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="chat">
+    <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon.png">
+
+    <title>Under25 App</title>
+    <link rel="manifest" href="manifest.json">
+  <script src="splash/splash.js"></script>
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+  <link rel="stylesheet" type="text/css" href="splash/style.css">
+</head>
+<body>
+<!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+
+<!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+
+<!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-analytics.js"></script>
+
+<!-- Add Firebase products that you want to use -->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-messaging.js"></script>
+
+<!-- This script installs service_worker.js to provide PWA functionality to
+     application. For more information, see:
+     https://developers.google.com/web/fundamentals/primers/service-workers -->
+<script>
+    // For Firebase JavaScript SDK v7.20.0 and later, `measurementId` is an optional field
+    var firebaseConfig = {
+    apiKey: "AIzaSyBOAdb1O97CS45TiDvkQdv-1uOeeHuL79o",
+    authDomain: "under-25-app-82c44.firebaseapp.com",
+    projectId: "under-25-app-82c44",
+    storageBucket: "under-25-app-82c44.appspot.com",
+    messagingSenderId: "949071542993",
+    appId: "1:949071542993:web:fa101c26c5adfae3d0a3f0",
+    measurementId: "G-GQ5DL270JH"
+  };
+
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+</script>
+<script>
+  !function(){;
+    analytics.load("diJjCahnDVQ2I9hAT1MkByf5aRhGadiK");
+    analytics.page();
+  }();
+</script>
+<script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('flutter-first-frame', function () {
+        navigator.serviceWorker.register('flutter_service_worker.js?v=84990800');
+      });
+    }
+</script>
+<script>
+    window.addEventListener('load', function(ev) {
+      // Download main.dart.js
+      _flutter.loader.loadEntrypoint({
+        serviceWorker: {
+          serviceWorkerVersion: serviceWorkerVersion,
+        }
+      }).then(function(engineInitializer) {
+        return engineInitializer.initializeEngine();
+      }).then(function(appRunner) {
+        return appRunner.runApp();
+      });
+    });
+  </script>
+
+<script src="main.dart.js" type="application/javascript"></script>
+
+
+</body></html>
