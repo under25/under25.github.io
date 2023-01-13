@@ -7,10 +7,11 @@ const RESOURCES = {
 "splash/splash.js": "123c400b58bea74c1305ca3ac966748d",
 "splash/style.css": "13622a3006790c0ee8514f19547097be",
 "favicon.ico": "e7869fc054154cc0efde3b56e0a706a1",
-"index.html": "717f304155f0557f28a6163f60c68b86",
-"/": "717f304155f0557f28a6163f60c68b86",
+"index.html": "fa652abf8910bdd397413493769ac491",
+"/": "fa652abf8910bdd397413493769ac491",
 "favicon.pngd": "5dcef449791fa27946b3d35ad8803796",
-"main.dart.js": "2e5f54424b4a89294964451fc5645780",
+"main.dart.js": "4e48accc98fba0e1af59c92363945961",
+"flutter.js": "f85e6fb278b0fd20c349186fb46ae36d",
 "favicon.png": "8936003b16ef314ec9c84c7ecc331144",
 "icons/favicon-16x16.png": "c093677a032665c240497cd1b6618807",
 "icons/apple-touch-icon.png": "a4aa661f5150833af88467df96e0d533",
@@ -799,7 +800,11 @@ const RESOURCES = {
 "assets/assets/themeImages/option5.png": "b4971f7839b34ec32b804fd14670297d",
 "assets/assets/themeImages/option1.png": "198e201e837491bb224e44a7db26d898",
 "assets/assets/themeImages/option2.png": "2b7c81d80c6020f677510d8c8cad3006",
-"assets/assets/themeImages/option3.png": "0f36e9b08909921d144518f5188b9c3e"
+"assets/assets/themeImages/option3.png": "0f36e9b08909921d144518f5188b9c3e",
+"canvaskit/canvaskit.js": "2bc454a691c631b07a9307ac4ca47797",
+"canvaskit/profiling/canvaskit.js": "38164e5a72bdad0faa4ce740c9b8e564",
+"canvaskit/profiling/canvaskit.wasm": "95a45378b69e77af5ed2bc72b2209b94",
+"canvaskit/canvaskit.wasm": "bf50631470eb967688cca13ee181af62"
 };
 
 // The application shell files that are downloaded before a service worker can
