@@ -24,9 +24,20 @@
 
     <title>Under 25</title>
     <link rel="manifest" href="manifest.json">
-  <script src="splash/splash.js"></script>
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
   <link rel="stylesheet" type="text/css" href="splash/style.css">
+  <!-- Renderer specifier -->
+  <script>
+    let searchParams = new URLSearchParams(window.location.search);
+    if (searchParams.has('renderer')) {
+      window.flutterWebRenderer = searchParams.get('renderer');
+      console.log(searchParams.get('renderer') + ' renderer requested in the URL');
+    }
+    // The value below is injected by flutter build, do not touch.
+    var serviceWorkerVersion = '1816190072';
+  </script>
+
+  <script src="flutter.js" defer></script>
 </head>
 <body>
 <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
@@ -41,49 +52,161 @@
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-messaging.js"></script>
+<style>
+  body {
+    background-color: #ffffff;
+  }
+</style>
 
-<!-- This script installs service_worker.js to provide PWA functionality to
-     application. For more information, see:
-     https://developers.google.com/web/fundamentals/primers/service-workers -->
-<script>
-    // For Firebase JavaScript SDK v7.20.0 and later, `measurementId` is an optional field
-    var firebaseConfig = {
-    apiKey: "AIzaSyBOAdb1O97CS45TiDvkQdv-1uOeeHuL79o",
-    authDomain: "under-25-app-82c44.firebaseapp.com",
-    projectId: "under-25-app-82c44",
-    storageBucket: "under-25-app-82c44.appspot.com",
-    messagingSenderId: "949071542993",
-    appId: "1:949071542993:web:fa101c26c5adfae3d0a3f0",
-    measurementId: "G-GQ5DL270JH"
-  };
-
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-
-</script>
-<script>
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('flutter-first-frame', function () {
-        navigator.serviceWorker.register('flutter_service_worker.js?v=2106938018');
-      });
+<!-- Cookie notice -->
+<div>
+  <style>
+    #cookie-notice {
+      background-color: #fff;
+      bottom: 0;
+      box-shadow: 0px 8px 24px rgba(0, 0, 0, .25);
+      -webkit-box-direction: normal;
+      -webkit-font-smoothing: antialiased;
+      display: none;
+      left: 0;
+      opacity: 0;
+      padding: 40px 0;
+      position: fixed;
+      width: 100%;
+      z-index: 11;
     }
-</script>
-<script>
-    window.addEventListener('load', function(ev) {
-      // Download main.dart.js
-      _flutter.loader.loadEntrypoint({
-        serviceWorker: {
-          serviceWorkerVersion: serviceWorkerVersion,
-        }
-      }).then(function(engineInitializer) {
-        return engineInitializer.initializeEngine();
-      }).then(function(appRunner) {
-        return appRunner.runApp();
-      });
-    });
-  </script>
 
-<script src="main.dart.js" type="application/javascript"></script>
+    #cookie-notice.show {
+      animation-delay: .2s;
+      animation-duration: .5s;
+      animation-fill-mode: forwards;
+      animation-iteration-count: 1;
+      animation-name: fadein;
+      animation-timing-function: cubic-bezier(.27, .89, .39, .95);
+      display: block;
+    }
+
+    @keyframes fadein {
+      0% {
+        opacity: 0
+      }
+
+      to {
+        opacity: 1
+      }
+    }
+
+    .container {
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+      top: 1px;
+      margin: 0 auto;
+      max-width: calc(1280px - 100px);
+      width: calc(100% - 24px*2);
+    }
+
+    .container p {
+      max-width: 1200px;
+      margin: 0;
+      margin-right: 50px;
+      color: #4a4a4a;
+      font-size: 16px;
+      line-height: 1.5;
+
+    }
+
+    p a {
+      color: #0468d7;
+      text-decoration: none;
+    }
+
+    button {
+      background-color: #0468d7;
+      color: #fff;
+      align-items: center;
+      justify-content: center;
+      border: 0 solid;
+      border-radius: 24px;
+      cursor: pointer;
+      display: inline-flex;
+      font-family: "Google Sans", sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      height: 40px;
+      padding: 0 32px;
+      text-align: center;
+      line-height: 1.15;
+    }
+  </style>
+  <section id="cookie-notice">
+    <div class="container">
+      <p>Google uses cookies to deliver its services, to personalize ads, and to analyze traffic. You can
+        adjust your privacy controls anytime in your
+        <a href="https://myaccount.google.com/data-and-personalization" target="_blank" rel="noopener">Google
+          settings</a>.
+        <a href="https://policies.google.com/technologies/cookies" target="_blank" rel="noopener">Learn more</a>.
+      </p>
+      <button id="cookie-consent">Okay</button>
+    </div>
+  </section>
+</div>
+
+<!-- Loading indicator -->
+<div id="loading">
+  <style>
+    body {
+      inset: 0;
+      overflow: hidden;
+      margin: 0;
+      height: 100;
+      width: 100;
+      padding: 0;
+      position: fixed;
+    }
+
+    #loading {
+      align-items: center;
+      display: flex;
+      height: 100%;
+      justify-content: center;
+      width: 100%;
+    }
+
+  </style>
+  <video width="200" height="200" autoplay loop muted playsinline>
+    <source src="./assets/loading.webm" type="video/webm">
+    <source src="./assets/loading.mp4" type="video/mp4">
+
+    Your browser does not support HTML5 video.       
+    <a href="./assets/loading.gif">Click here to view original GIF</a>
+</video>
+</div>
+<script>
+  window.addEventListener('load', function () {
+    var loading = document.querySelector('#loading');
+    _flutter.loader.loadEntrypoint({
+      serviceWorker: {
+        serviceWorkerVersion: serviceWorkerVersion,
+      }
+    }).then(function (engineInitializer) {
+      loading.classList.add('main_done');
+      return engineInitializer.initializeEngine();
+    }).then(function (appRunner) {
+      loading.classList.add('init_done');
+      return appRunner.runApp();
+    }).then(function (app) {
+      // Wait a few milliseconds so users can see the "zoooom" animation
+      // before getting rid of the "loading" div.
+      window.setTimeout(function () {
+        loading.remove();
+      }, 400);
+    });
+  });
+</script>
+
+<!-- <script src="main.dart.js" type="application/javascript"></script> -->
 
 
 </body></html>
